@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Restaurant Reviews</title>
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- Android  -->
+  <meta name="theme-color" content="#0275d8">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <!-- iOS -->
+  <meta name="apple-mobile-web-app-title" content="Restaurants Reviews">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- Windows  -->
+  <meta name="msapplication-navbutton-color" content="#0275d8">
+  <meta name="msapplication-TileColor" content="#333333">
+  <meta name="msapplication-TileImage" content="icons-192.png">
+
+  <link rel="icon" type="image/png" href="img/favicon.ico">
+  <style>
+    /*! normalize.css v8.0.0 | MIT License | github.com/necolas/normalize.css */
+    html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}pre {font-family:monospace,monospace;font-size:1em}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}  ::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}template{display:none}[hidden]{display:none}
+    /*# sourceMappingURL=normalize.min.css.map */
+    /* Font Awesome */ 
+    @font-face{font-family:Font Awesome\ 5 Brands;font-style:normal;font-weight:400;src:url(../webfonts/fa-brands-400.eot);src:url(../webfonts/fa-brands-400.eot?#iefix) format("embedded-opentype"),url(../webfonts/fa-brands-400.woff2) format("woff2"),url(../webfonts/fa-brands-400.woff) format("woff"),url(../webfonts/fa-brands-400.ttf) format("truetype"),url(../webfonts/fa-brands-400.svg#fontawesome) format("svg")}.fab{font-family:Font Awesome\ 5 Brands}@font-face{font-family:Font Awesome\ 5 Free;font-style:normal;font-weight:400;src:url(../webfonts/fa-regular-400.eot);src:url(../webfonts/fa-regular-400.eot?#iefix) format("embedded-opentype"),url(../webfonts/fa-regular-400.woff2) format("woff2"),url(../webfonts/fa-regular-400.woff) format("woff"),url(../webfonts/fa-regular-400.ttf) format("truetype"),url(../webfonts/fa-regular-400.svg#fontawesome) format("svg")}.far{font-weight:400}@font-face{font-family:Font Awesome\ 5 Solid;font-style:normal;font-weight:900;src:url(../webfonts/fa-solid-900.eot);src:url(../webfonts/fa-solid-900.eot?#iefix) format("embedded-opentype"),url(../webfonts/fa-solid-900.woff2) format("woff2"),url(../webfonts/fa-solid-900.woff) format("woff"),url(../webfonts/fa-solid-900.ttf) format("truetype"),url(../webfonts/fa-solid-900.svg#fontawesome) format("svg")}.fa,.far,.fas{font-family:Font Awesome\ 5 Free}.fa,.fas{font-weight:900}
+    /* style.css */
+    
+  </style>
+  <link rel="stylesheet" type="text/css" href="css/styles.min.css">
+</head>
+
+<body>
+  <!-- content container -->
+  <div class="container">
+    <!-- page header -->
+    <header id="header">
+      <nav>
+        <h1>
+          <a href="/">Restaurant Reviews</a>
+        </h1>
+      </nav>
+    </header>
+    <!-- main content -->
+    <main id="maincontent">
+      <!-- map -->
+      <section id="map-container" onmouseover="showHoverHint()" onmouseout="hideHoverHint()">
+        <p id="hover-hint" onclick="switchMaps()" style="display:none"><span>click to enable interactive mode</span></p>
+        <img id="static-map" tabindex="0" aria-label="map of restaurans, click to enable interactive mode" onclick="switchMaps()">
+        <div id="map" tabindex="0" role="application" style="display:none"></div>
+      </section>
+      <!-- filter options -->
+      <section id="map-options">
+        <div class="filter-wrapper">
+          <div class="filter-options">
+            <form id="filter-options-form">
+              <h3>Filter options</h3>
+              <label id="neighborhoods-select-label">
+                <select id="neighborhoods-select" tabindex="0" name="neighborhoods" onchange="updateRestaurants(true)">
+                  <option value="all">All Neighborhoods</option>
+                </select>
+              </label>
+              <label id="cuisines-select-label">
+                <select id="cuisines-select" tabindex="0" name="cuisines" onchange="updateRestaurants(true)">
+                  <option value="all">All Cuisines</option>
+                </select>
+              </label>
+            </form>
+            <aside>
+              <button><span>Hide</span></button>
+              <a role="button" href="#restaurants">Show List</a>
+            </aside>
+          </div>
+        </div>
+      </section>
+      <!-- list of found restaurants -->
+      <section id="restaurants">
+        <h2>Restaurants in neighborhoods</h2>
+        <ul id="restaurants-list"></ul>
+      </section>  
+    </main>
+    <!-- page footer -->
+    <footer id="footer">
+      <p>Copyrights © 2017</p>
+      <a href="/">
+        <strong>Restaurant Reviews</strong>
+      </a>
+      <p>All Rights Reserved.</p>
+    </footer>
+  </div>
+  <script src="js/idb.js"></script>
+  <script src="js/dbhelper.js"></script>
+  <script src="js/main.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=<put Google API key here>&libraries=places&callback=initMap" async defer></script>
+</body>
+
+</html>
